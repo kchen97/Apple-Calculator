@@ -11,9 +11,10 @@ import UIKit
 class ViewController: UIViewController {
 
     //MARK: Properties
+    let dictOfOps = [15 : "/", 14: "*", 13 : "-", 12 : "+"]
     private var calculator = Calculator()
     @IBOutlet weak var displayLabel: UILabel!
-    var currentTextDisplayed : String = ""
+    var currentTextDisplayed : String = "0"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,30 +29,29 @@ class ViewController: UIViewController {
     //MARK: Actions
     @IBAction func buttonPressed(_ sender: UIButton) {
         if sender.tag >= 0 && sender.tag <= 9 {
-            if calculator.op.isEmpty {
-                calculator.operand1.append(String(sender.tag))
-                currentTextDisplayed = calculator.operand1
-            }
-            else {
-                calculator.operand2.append(String(sender.tag))
-                currentTextDisplayed = calculator.operand2
-            }
+            addToOperand(state: calculator.state, value: sender.tag)
         }
         else if sender.tag == 18 {
             reset()
             return
         }
-        else if sender.tag == 15 {
-            calculator.op = "/"
+        else if sender.tag == 16 {
+            calculator.op = "%"
+            if let result = calculator.compute() {
+                currentTextDisplayed = result
+            }
         }
-        else if sender.tag == 14 {
-            calculator.op = "*"
-        }
-        else if sender.tag == 13 {
-            calculator.op = "-"
-        }
-        else if sender.tag == 12 {
-            calculator.op = "+"
+        else if sender.tag <= 15 && sender.tag >= 12 {
+            if calculator.state == .onOperator1 {
+                calculator.op = dictOfOps[sender.tag]
+                calculator.state = .onOperator2
+            }
+            else {
+                if let result = calculator.compute() {
+                    currentTextDisplayed = result
+                }
+                calculator.op = dictOfOps[sender.tag]
+            }
         }
         else if sender.tag == 11 {
             guard let text = calculator.compute() else {
@@ -63,12 +63,33 @@ class ViewController: UIViewController {
         updateUI()
     }
     
+    func addToOperand(state: CalculatorState, value: Int) {
+        if state == .onOperator1 {
+            if calculator.operand1 == nil {
+                calculator.operand1 = String(value)
+            }
+            else {
+                calculator.operand1?.append(String(value))
+            }
+            currentTextDisplayed = calculator.operand1!
+        }
+        else {
+            if calculator.operand2 == nil {
+                calculator.operand2 = String(value)
+            }
+            else {
+                calculator.operand2?.append(String(value))
+            }
+            currentTextDisplayed = calculator.operand2!
+        }
+    }
+    
     func updateUI() {
         displayLabel.text = currentTextDisplayed
     }
     
     func reset() {
-        currentTextDisplayed.removeAll()
+        currentTextDisplayed = "0"
         calculator.clear()
         updateUI()
     }

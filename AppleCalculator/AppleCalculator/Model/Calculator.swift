@@ -8,53 +8,61 @@
 
 import Foundation
 
+enum CalculatorState {
+    case onOperator1
+    case onOperator2
+}
+
 class Calculator {
-    var operand1 : String
-    var operand2 : String
-    var op : String
+    var operand1 : String?
+    var operand2 : String?
+    var op : String?
+    var state : CalculatorState
     
     init() {
         operand1 = ""
         operand2 = ""
         op = ""
+        state = .onOperator1
     }
     
     func compute() -> String? {
-        guard !op.isEmpty else {
-            return nil
+        
+        if let oper1 = operand1, let op = op {
+            if op == "%" {
+                return String(Float(oper1)! / 100)
+            }
         }
         
-        guard !operand1.isEmpty else {
-            return nil
-        }
-        
-        guard !operand2.isEmpty else {
-            return nil
-        }
-        
-        if op == "*" {
-            operand1 = String(Int(operand1)! * Int(operand2)!)
-            operand2 = ""
-        }
-        else if op == "/" {
-            operand1 = String(Int(operand1)! / Int(operand2)!)
-            operand2 = ""
-        }
-        else if op == "+" {
-            operand1 = String(Int(operand1)! + Int(operand2)!)
-            operand2 = ""
+        if let oper1 = operand1, let oper2 = operand2, let op = op {
+            if op == "*" {
+                operand1 = String(Float(oper1)! * Float(oper2)!)
+                operand2 = nil
+            }
+            else if op == "/" {
+                operand1 = String(Float(oper1)! / Float(oper2)!)
+                operand2 = nil
+            }
+            else if op == "+" {
+                operand1 = String(Float(oper1)! + Float(oper2)!)
+                operand2 = nil
+            }
+            else {
+                operand1 = String(Float(oper1)! - Float(oper2)!)
+                operand2 = nil
+            }
         }
         else {
-            operand1 = String(Int(operand1)! - Int(operand2)!)
-            operand2 = ""
+            return nil
         }
         
         return operand1
     }
     
     func clear() {
-        operand1 = ""
-        operand2 = ""
-        op = ""
+        operand1 = nil
+        operand2 = nil
+        op = nil
+        state = .onOperator1
     }
 }
