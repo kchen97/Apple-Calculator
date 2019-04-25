@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/kochen97.github.io/static/js/main.1406a98b.chunk.js",
-    "main.js.map": "/kochen97.github.io/static/js/main.1406a98b.chunk.js.map",
-    "runtime~main.js": "/kochen97.github.io/static/js/runtime~main.d593e32f.js",
-    "runtime~main.js.map": "/kochen97.github.io/static/js/runtime~main.d593e32f.js.map",
-    "static/js/2.4cbfd1a3.chunk.js": "/kochen97.github.io/static/js/2.4cbfd1a3.chunk.js",
-    "static/js/2.4cbfd1a3.chunk.js.map": "/kochen97.github.io/static/js/2.4cbfd1a3.chunk.js.map",
-    "index.html": "/kochen97.github.io/index.html",
-    "precache-manifest.c1522561e76fcb3e8125c2cefe42c738.js": "/kochen97.github.io/precache-manifest.c1522561e76fcb3e8125c2cefe42c738.js",
-    "service-worker.js": "/kochen97.github.io/service-worker.js"
+    "main.js": "/home/static/js/main.9ea735bc.chunk.js",
+    "main.js.map": "/home/static/js/main.9ea735bc.chunk.js.map",
+    "runtime~main.js": "/home/static/js/runtime~main.0990ee84.js",
+    "runtime~main.js.map": "/home/static/js/runtime~main.0990ee84.js.map",
+    "static/js/2.4cbfd1a3.chunk.js": "/home/static/js/2.4cbfd1a3.chunk.js",
+    "static/js/2.4cbfd1a3.chunk.js.map": "/home/static/js/2.4cbfd1a3.chunk.js.map",
+    "index.html": "/home/index.html",
+    "precache-manifest.296e9e2385a7805030bd9876c11437ad.js": "/home/precache-manifest.296e9e2385a7805030bd9876c11437ad.js",
+    "service-worker.js": "/home/service-worker.js"
   }
 }
